@@ -1,3 +1,3 @@
 # Injector
 
-!(https://i.imgur.com/O3Tsrp6.png)
+![1](https://i.imgur.com/O3Tsrp6.png)

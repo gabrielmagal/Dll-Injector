@@ -1,4 +1,5 @@
 # Injector
+This is a simple injector project dedicated to studies! 
 
 # **Methods**
 - [X] - StandardA

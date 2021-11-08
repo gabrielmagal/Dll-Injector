@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.nightForm1 = new ReaLTaiizor.Forms.NightForm();
             this.btn_close = new ReaLTaiizor.Controls.LostButton();
             this.statusbar = new ReaLTaiizor.Controls.ForeverStatusBar();
@@ -47,13 +48,16 @@
             this.rdb_method_standardW = new ReaLTaiizor.Controls.ForeverRadioButton();
             this.rdb_method_standardA = new ReaLTaiizor.Controls.ForeverRadioButton();
             this.group_dll = new ReaLTaiizor.Controls.ThunderGroupBox();
+            this.listview_dlls = new ReaLTaiizor.Controls.PoisonListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btn_dll_removeAll = new ReaLTaiizor.Controls.LostButton();
             this.btn_dll_remove = new ReaLTaiizor.Controls.LostButton();
             this.btn_dll_add = new ReaLTaiizor.Controls.LostButton();
-            this.crownDropDownList1 = new ReaLTaiizor.Controls.CrownDropDownList();
             this.group_process = new ReaLTaiizor.Controls.ThunderGroupBox();
             this.txb_process = new ReaLTaiizor.Controls.CrownTextBox();
             this.btn_process_listAllProcess = new ReaLTaiizor.Controls.LostButton();
+            this.timer_automatic_injection = new System.Windows.Forms.Timer(this.components);
             this.nightForm1.SuspendLayout();
             this.group_injection.SuspendLayout();
             this.group_settings.SuspendLayout();
@@ -167,6 +171,7 @@
             this.chk_injection_automatic.Size = new System.Drawing.Size(131, 22);
             this.chk_injection_automatic.TabIndex = 7;
             this.chk_injection_automatic.Text = "Automatic Injection";
+            this.chk_injection_automatic.CheckedChanged += new ReaLTaiizor.Controls.ForeverCheckBox.CheckedChangedEventHandler(this.chk_injection_automatic_CheckedChanged);
             // 
             // btn_inject
             // 
@@ -228,6 +233,7 @@
             this.thunderGroupBox8.Name = "thunderGroupBox8";
             this.thunderGroupBox8.Size = new System.Drawing.Size(281, 62);
             this.thunderGroupBox8.TabIndex = 12;
+            this.thunderGroupBox8.Text = "Profile";
             // 
             // foreverComboBox2
             // 
@@ -277,7 +283,6 @@
             this.cbb_peHeader.ItemHeight = 18;
             this.cbb_peHeader.Items.AddRange(new object[] {
             "Erase",
-            "Fake",
             "Random"});
             this.cbb_peHeader.Location = new System.Drawing.Point(15, 30);
             this.cbb_peHeader.Name = "cbb_peHeader";
@@ -355,7 +360,7 @@
             this.rdb_method_standardA.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(61)))));
             this.rdb_method_standardA.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
             this.rdb_method_standardA.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(168)))), ((int)(((byte)(109)))));
-            this.rdb_method_standardA.Checked = false;
+            this.rdb_method_standardA.Checked = true;
             this.rdb_method_standardA.Cursor = System.Windows.Forms.Cursors.Hand;
             this.rdb_method_standardA.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.rdb_method_standardA.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
@@ -373,16 +378,46 @@
             this.group_dll.BodyColorB = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(61)))));
             this.group_dll.BodyColorC = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(61)))));
             this.group_dll.BodyColorD = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(61)))));
+            this.group_dll.Controls.Add(this.listview_dlls);
             this.group_dll.Controls.Add(this.btn_dll_removeAll);
             this.group_dll.Controls.Add(this.btn_dll_remove);
             this.group_dll.Controls.Add(this.btn_dll_add);
-            this.group_dll.Controls.Add(this.crownDropDownList1);
             this.group_dll.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.group_dll.Location = new System.Drawing.Point(41, 101);
             this.group_dll.Name = "group_dll";
             this.group_dll.Size = new System.Drawing.Size(488, 233);
             this.group_dll.TabIndex = 9;
             this.group_dll.Text = "Dll";
+            // 
+            // listview_dlls
+            // 
+            this.listview_dlls.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
+            this.listview_dlls.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.listview_dlls.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2});
+            this.listview_dlls.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.listview_dlls.FullRowSelect = true;
+            this.listview_dlls.Location = new System.Drawing.Point(13, 33);
+            this.listview_dlls.Name = "listview_dlls";
+            this.listview_dlls.OwnerDraw = true;
+            this.listview_dlls.Size = new System.Drawing.Size(462, 160);
+            this.listview_dlls.Style = ReaLTaiizor.Enum.Poison.ColorStyle.Silver;
+            this.listview_dlls.TabIndex = 6;
+            this.listview_dlls.UseCompatibleStateImageBehavior = false;
+            this.listview_dlls.UseCustomBackColor = true;
+            this.listview_dlls.UseSelectable = true;
+            this.listview_dlls.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "File";
+            this.columnHeader1.Width = 133;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Path";
+            this.columnHeader2.Width = 327;
             // 
             // btn_dll_removeAll
             // 
@@ -397,6 +432,7 @@
             this.btn_dll_removeAll.Size = new System.Drawing.Size(116, 23);
             this.btn_dll_removeAll.TabIndex = 5;
             this.btn_dll_removeAll.Text = "Remove All";
+            this.btn_dll_removeAll.Click += new System.EventHandler(this.btn_dll_removeAll_Click);
             // 
             // btn_dll_remove
             // 
@@ -411,6 +447,7 @@
             this.btn_dll_remove.Size = new System.Drawing.Size(116, 23);
             this.btn_dll_remove.TabIndex = 4;
             this.btn_dll_remove.Text = "Remove";
+            this.btn_dll_remove.Click += new System.EventHandler(this.btn_dll_remove_Click);
             // 
             // btn_dll_add
             // 
@@ -425,14 +462,7 @@
             this.btn_dll_add.Size = new System.Drawing.Size(116, 23);
             this.btn_dll_add.TabIndex = 3;
             this.btn_dll_add.Text = "Add";
-            // 
-            // crownDropDownList1
-            // 
-            this.crownDropDownList1.Location = new System.Drawing.Point(24, 34);
-            this.crownDropDownList1.Name = "crownDropDownList1";
-            this.crownDropDownList1.Size = new System.Drawing.Size(441, 162);
-            this.crownDropDownList1.TabIndex = 0;
-            this.crownDropDownList1.Text = "crownDropDownList1";
+            this.btn_dll_add.Click += new System.EventHandler(this.btn_dll_add_Click);
             // 
             // group_process
             // 
@@ -474,6 +504,11 @@
             this.btn_process_listAllProcess.Size = new System.Drawing.Size(40, 23);
             this.btn_process_listAllProcess.TabIndex = 1;
             this.btn_process_listAllProcess.Text = "...";
+            this.btn_process_listAllProcess.Click += new System.EventHandler(this.btn_process_listAllProcess_Click);
+            // 
+            // timer_automatic_injection
+            // 
+            this.timer_automatic_injection.Tick += new System.EventHandler(this.timer_automatic_injection_Tick);
             // 
             // Form1
             // 
@@ -512,7 +547,6 @@
         private ReaLTaiizor.Controls.ThunderGroupBox group_dll;
         private ReaLTaiizor.Controls.LostButton btn_dll_remove;
         private ReaLTaiizor.Controls.LostButton btn_dll_add;
-        private ReaLTaiizor.Controls.CrownDropDownList crownDropDownList1;
         private ReaLTaiizor.Controls.ThunderGroupBox group_settings;
         private ReaLTaiizor.Controls.ThunderGroupBox group_additionals;
         private ReaLTaiizor.Controls.ThunderGroupBox group_method;
@@ -531,6 +565,10 @@
         private ReaLTaiizor.Controls.ThunderGroupBox thunderGroupBox8;
         private ReaLTaiizor.Controls.ForeverComboBox foreverComboBox2;
         private ReaLTaiizor.Controls.ThunderGroupBox group_peHeader;
+        private ReaLTaiizor.Controls.PoisonListView listview_dlls;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.Timer timer_automatic_injection;
     }
 }
 

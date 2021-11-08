@@ -3,7 +3,7 @@ This is a simple injector project dedicated to studies!
 
 # **Methods**
 - [X] - StandardA
-- [X] - StandardA
+- [X] - StandardW
 - [ ] - LdrLoadDll
 - [ ] - ManuallMap
 

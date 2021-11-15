@@ -32,16 +32,15 @@ namespace Injector
         {
             OpenFileDialog filedialog_path_dll = new OpenFileDialog
             {
-                InitialDirectory = @"D:\",
-                Title = "Browse Text Files",
+                InitialDirectory = @"C:\",
+                Title = "Browse dll Files",
                 CheckFileExists = true,
                 CheckPathExists = true,
-                DefaultExt = "txt",
+                DefaultExt = "dll",
                 Filter = "dll (*.dll)|*.dll",
                 FilterIndex = 2,
                 RestoreDirectory = true,
-                ReadOnlyChecked = true,
-                ShowReadOnly = true
+                ReadOnlyChecked = true
             };
 
             if (filedialog_path_dll.ShowDialog() == DialogResult.OK)
@@ -95,6 +94,12 @@ namespace Injector
             if (rdb_method_standardW.Checked && listview_dlls.SelectedIndices.Count > 0)
             {
                 statusbar.Text = MethodInjection.standardW(listview_dlls.SelectedItems[0].SubItems[1].Text, Process.GetProcessesByName(txb_process.Text)[0].Id, cbb_peHeader.SelectedIndex);
+                msg_inject_sucess(statusbar.Text);
+            }
+
+            if (rdb_method_manuallMap.Checked && listview_dlls.SelectedIndices.Count > 0)
+            {
+                statusbar.Text = MethodInjection.manuallMap(listview_dlls.SelectedItems[0].SubItems[1].Text, Process.GetProcessesByName(txb_process.Text)[0].Id, cbb_peHeader.SelectedIndex);
                 msg_inject_sucess(statusbar.Text);
             }
 

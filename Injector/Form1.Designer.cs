@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.nightForm1 = new ReaLTaiizor.Forms.NightForm();
             this.btn_close = new ReaLTaiizor.Controls.LostButton();
             this.statusbar = new ReaLTaiizor.Controls.ForeverStatusBar();
@@ -517,6 +518,7 @@
             this.ClientSize = new System.Drawing.Size(559, 667);
             this.Controls.Add(this.nightForm1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(1920, 1032);
             this.MinimumSize = new System.Drawing.Size(261, 61);
             this.Name = "Form1";

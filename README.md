@@ -5,7 +5,7 @@ This is a simple injector project dedicated to studies!
 - [X] - StandardA
 - [X] - StandardW
 - [ ] - LdrLoadDll
-- [ ] - ManuallMap
+- [x] - ManuallMap
 
 
 ![1](https://i.imgur.com/O3Tsrp6.png)

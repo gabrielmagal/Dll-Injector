@@ -354,9 +354,6 @@ namespace Injector
 		[DllImport("kernel32.dll", SetLastError = true)]
 		internal static extern IntPtr OpenProcess(uint processAccess, bool bInheritHandle, int processId);
 
-		[DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)] 
-		internal static extern IntPtr LoadLibrary(string lpFileName);
-		
 		[DllImport("kernel32", CharSet = CharSet.Ansi, ExactSpelling = true, SetLastError = true)]
 		internal static extern IntPtr GetProcAddress(IntPtr hModule, string procName);
 
@@ -382,17 +379,9 @@ namespace Injector
 		[DllImport("kernel32.dll", SetLastError = true)] 
 		internal static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, int dwSize, out IntPtr lpNumberOfBytesWritten);
 
-		[DllImport("kernel32.dll")]
-		internal static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, int dwSize, out IntPtr lpNumberOfBytesRead);
-
-		[DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-		internal static extern bool SetDllDirectory(string lpPathName);
 
 		[DllImport("kernel32.dll", SetLastError = true)]
 		internal static extern bool GetExitCodeThread(IntPtr hThread, out uint lpExitCode);
-
-        [DllImport("kernel32.dll")]
-        internal static extern IntPtr LoadLibraryA(string lpLibFileName);
     }
 
 	internal class additionalMethods

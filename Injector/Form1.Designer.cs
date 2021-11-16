@@ -40,7 +40,8 @@
             this.group_settings = new ReaLTaiizor.Controls.ThunderGroupBox();
             this.group_additionals = new ReaLTaiizor.Controls.ThunderGroupBox();
             this.thunderGroupBox8 = new ReaLTaiizor.Controls.ThunderGroupBox();
-            this.foreverComboBox2 = new ReaLTaiizor.Controls.ForeverComboBox();
+            this.btn_save_config = new ReaLTaiizor.Controls.LostButton();
+            this.cbb_profile = new ReaLTaiizor.Controls.ForeverComboBox();
             this.group_peHeader = new ReaLTaiizor.Controls.ThunderGroupBox();
             this.cbb_peHeader = new ReaLTaiizor.Controls.ForeverComboBox();
             this.group_method = new ReaLTaiizor.Controls.ThunderGroupBox();
@@ -87,7 +88,7 @@
             this.nightForm1.MinimumSize = new System.Drawing.Size(100, 42);
             this.nightForm1.Name = "nightForm1";
             this.nightForm1.Padding = new System.Windows.Forms.Padding(0, 31, 0, 0);
-            this.nightForm1.Size = new System.Drawing.Size(559, 667);
+            this.nightForm1.Size = new System.Drawing.Size(559, 725);
             this.nightForm1.TabIndex = 0;
             this.nightForm1.Text = "x86 Injector";
             this.nightForm1.TextAlignment = ReaLTaiizor.Forms.NightForm.Alignment.Left;
@@ -113,7 +114,7 @@
             this.statusbar.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.statusbar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusbar.ForeColor = System.Drawing.Color.White;
-            this.statusbar.Location = new System.Drawing.Point(0, 644);
+            this.statusbar.Location = new System.Drawing.Point(0, 702);
             this.statusbar.Name = "statusbar";
             this.statusbar.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(168)))), ((int)(((byte)(109)))));
             this.statusbar.ShowTimeDate = false;
@@ -135,7 +136,7 @@
             this.group_injection.Controls.Add(this.chk_injection_automatic);
             this.group_injection.Controls.Add(this.btn_inject);
             this.group_injection.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.group_injection.Location = new System.Drawing.Point(41, 553);
+            this.group_injection.Location = new System.Drawing.Point(41, 613);
             this.group_injection.Name = "group_injection";
             this.group_injection.Size = new System.Drawing.Size(488, 87);
             this.group_injection.TabIndex = 9;
@@ -201,7 +202,7 @@
             this.group_settings.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.group_settings.Location = new System.Drawing.Point(41, 337);
             this.group_settings.Name = "group_settings";
-            this.group_settings.Size = new System.Drawing.Size(488, 213);
+            this.group_settings.Size = new System.Drawing.Size(488, 273);
             this.group_settings.TabIndex = 10;
             this.group_settings.Text = "Settings";
             // 
@@ -215,9 +216,9 @@
             this.group_additionals.Controls.Add(this.thunderGroupBox8);
             this.group_additionals.Controls.Add(this.group_peHeader);
             this.group_additionals.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.group_additionals.Location = new System.Drawing.Point(16, 107);
+            this.group_additionals.Location = new System.Drawing.Point(16, 104);
             this.group_additionals.Name = "group_additionals";
-            this.group_additionals.Size = new System.Drawing.Size(457, 97);
+            this.group_additionals.Size = new System.Drawing.Size(457, 163);
             this.group_additionals.TabIndex = 10;
             this.group_additionals.Text = "Additionals";
             // 
@@ -228,31 +229,48 @@
             this.thunderGroupBox8.BodyColorB = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(61)))));
             this.thunderGroupBox8.BodyColorC = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(61)))));
             this.thunderGroupBox8.BodyColorD = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(61)))));
-            this.thunderGroupBox8.Controls.Add(this.foreverComboBox2);
+            this.thunderGroupBox8.Controls.Add(this.btn_save_config);
+            this.thunderGroupBox8.Controls.Add(this.cbb_profile);
             this.thunderGroupBox8.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.thunderGroupBox8.Location = new System.Drawing.Point(168, 28);
+            this.thunderGroupBox8.Location = new System.Drawing.Point(39, 91);
             this.thunderGroupBox8.Name = "thunderGroupBox8";
-            this.thunderGroupBox8.Size = new System.Drawing.Size(281, 62);
+            this.thunderGroupBox8.Size = new System.Drawing.Size(379, 62);
             this.thunderGroupBox8.TabIndex = 12;
             this.thunderGroupBox8.Text = "Profile";
             // 
-            // foreverComboBox2
+            // btn_save_config
             // 
-            this.foreverComboBox2.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
-            this.foreverComboBox2.BGColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(47)))), ((int)(((byte)(49)))));
-            this.foreverComboBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.foreverComboBox2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.foreverComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.foreverComboBox2.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.foreverComboBox2.ForeColor = System.Drawing.Color.White;
-            this.foreverComboBox2.FormattingEnabled = true;
-            this.foreverComboBox2.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(168)))), ((int)(((byte)(109)))));
-            this.foreverComboBox2.HoverFontColor = System.Drawing.Color.White;
-            this.foreverComboBox2.ItemHeight = 18;
-            this.foreverComboBox2.Location = new System.Drawing.Point(13, 30);
-            this.foreverComboBox2.Name = "foreverComboBox2";
-            this.foreverComboBox2.Size = new System.Drawing.Size(256, 24);
-            this.foreverComboBox2.TabIndex = 1;
+            this.btn_save_config.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.btn_save_config.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_save_config.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btn_save_config.ForeColor = System.Drawing.Color.White;
+            this.btn_save_config.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.btn_save_config.Image = null;
+            this.btn_save_config.Location = new System.Drawing.Point(209, 30);
+            this.btn_save_config.Name = "btn_save_config";
+            this.btn_save_config.Size = new System.Drawing.Size(161, 24);
+            this.btn_save_config.TabIndex = 9;
+            this.btn_save_config.Text = "Save Config";
+            this.btn_save_config.Click += new System.EventHandler(this.btn_save_config_Click);
+            // 
+            // cbb_profile
+            // 
+            this.cbb_profile.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
+            this.cbb_profile.BGColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(47)))), ((int)(((byte)(49)))));
+            this.cbb_profile.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cbb_profile.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbb_profile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbb_profile.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.cbb_profile.ForeColor = System.Drawing.Color.White;
+            this.cbb_profile.FormattingEnabled = true;
+            this.cbb_profile.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(168)))), ((int)(((byte)(109)))));
+            this.cbb_profile.HoverFontColor = System.Drawing.Color.White;
+            this.cbb_profile.ItemHeight = 18;
+            this.cbb_profile.Location = new System.Drawing.Point(13, 30);
+            this.cbb_profile.Name = "cbb_profile";
+            this.cbb_profile.Size = new System.Drawing.Size(192, 24);
+            this.cbb_profile.TabIndex = 1;
+            this.cbb_profile.SelectedIndexChanged += new System.EventHandler(this.cbb_profile_SelectedIndexChanged);
             // 
             // group_peHeader
             // 
@@ -263,9 +281,9 @@
             this.group_peHeader.BodyColorD = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(61)))));
             this.group_peHeader.Controls.Add(this.cbb_peHeader);
             this.group_peHeader.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.group_peHeader.Location = new System.Drawing.Point(8, 28);
+            this.group_peHeader.Location = new System.Drawing.Point(39, 28);
             this.group_peHeader.Name = "group_peHeader";
-            this.group_peHeader.Size = new System.Drawing.Size(157, 62);
+            this.group_peHeader.Size = new System.Drawing.Size(379, 62);
             this.group_peHeader.TabIndex = 11;
             this.group_peHeader.Text = "PEHeader";
             // 
@@ -285,9 +303,9 @@
             this.cbb_peHeader.Items.AddRange(new object[] {
             "Erase",
             "Random"});
-            this.cbb_peHeader.Location = new System.Drawing.Point(15, 30);
+            this.cbb_peHeader.Location = new System.Drawing.Point(9, 30);
             this.cbb_peHeader.Name = "cbb_peHeader";
-            this.cbb_peHeader.Size = new System.Drawing.Size(121, 24);
+            this.cbb_peHeader.Size = new System.Drawing.Size(361, 24);
             this.cbb_peHeader.TabIndex = 0;
             // 
             // group_method
@@ -302,7 +320,7 @@
             this.group_method.Controls.Add(this.rdb_method_standardW);
             this.group_method.Controls.Add(this.rdb_method_standardA);
             this.group_method.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.group_method.Location = new System.Drawing.Point(16, 30);
+            this.group_method.Location = new System.Drawing.Point(16, 27);
             this.group_method.Name = "group_method";
             this.group_method.Size = new System.Drawing.Size(457, 74);
             this.group_method.TabIndex = 9;
@@ -394,6 +412,7 @@
             // 
             this.listview_dlls.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
             this.listview_dlls.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.listview_dlls.CheckBoxes = true;
             this.listview_dlls.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
@@ -515,7 +534,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(559, 667);
+            this.ClientSize = new System.Drawing.Size(559, 725);
             this.Controls.Add(this.nightForm1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -565,12 +584,13 @@
         private ReaLTaiizor.Controls.ForeverComboBox cbb_peHeader;
         private ReaLTaiizor.Controls.ForeverCheckBox chk_injection_close_on_inject;
         private ReaLTaiizor.Controls.ThunderGroupBox thunderGroupBox8;
-        private ReaLTaiizor.Controls.ForeverComboBox foreverComboBox2;
+        private ReaLTaiizor.Controls.ForeverComboBox cbb_profile;
         private ReaLTaiizor.Controls.ThunderGroupBox group_peHeader;
         private ReaLTaiizor.Controls.PoisonListView listview_dlls;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Timer timer_automatic_injection;
+        private ReaLTaiizor.Controls.LostButton btn_save_config;
     }
 }
 

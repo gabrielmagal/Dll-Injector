@@ -21,6 +21,7 @@ namespace Injector
         {
             InitializeComponent();
             if (!File.Exists(Application.StartupPath + "\\Config.ini")) File.Create(Application.StartupPath + "\\Config.ini").Close();
+            for (int i = 1; i < IniFile.GetSectionNames().Length; i++)  cbb_profile.Items.Add(IniFile.GetSectionNames()[i]);
         }
 
         private void btn_close_Click(object sender, EventArgs e)
@@ -73,36 +74,41 @@ namespace Injector
             if(!string.IsNullOrEmpty(strProcess)) txb_process.Text = strProcess;
         }
 
-        public void msg_inject_sucess(string msg)
+        public void msg_inject_sucess(string dll)
         {
             if (statusbar.Text.Equals("successfully injected"))
             {
                 statusbar.RectColor = Color.FromArgb(35, 168, 109);
-                statusbar.Text = $"{listview_dlls.SelectedItems[0].SubItems[0].Text} {statusbar.Text} in {txb_process.Text}";
+                statusbar.Text = $"{dll} {statusbar.Text} in {txb_process.Text}";
             }
             else statusbar.RectColor = Color.IndianRed;
         }
 
         public void inject()
         {
-            if (rdb_method_standardA.Checked && listview_dlls.SelectedIndices.Count > 0)
+            for (int i = 0; i < listview_dlls.Items.Count; i++)
             {
-                statusbar.Text = MethodInjection.standardA(listview_dlls.SelectedItems[0].SubItems[1].Text, Process.GetProcessesByName(txb_process.Text)[0].Id, cbb_peHeader.SelectedIndex);
-                msg_inject_sucess(statusbar.Text);
-            }
+                if (listview_dlls.Items[i].Checked)
+                {
+                    if (rdb_method_standardA.Checked)
+                    {
+                        statusbar.Text = MethodInjection.standardA(listview_dlls.Items[0].SubItems[1].Text, Process.GetProcessesByName(txb_process.Text)[0].Id, cbb_peHeader.SelectedIndex);
+                        msg_inject_sucess(listview_dlls.Items[0].Text);
+                    }
 
-            if (rdb_method_standardW.Checked && listview_dlls.SelectedIndices.Count > 0)
-            {
-                statusbar.Text = MethodInjection.standardW(listview_dlls.SelectedItems[0].SubItems[1].Text, Process.GetProcessesByName(txb_process.Text)[0].Id, cbb_peHeader.SelectedIndex);
-                msg_inject_sucess(statusbar.Text);
-            }
+                    if (rdb_method_standardW.Checked)
+                    {
+                        statusbar.Text = MethodInjection.standardW(listview_dlls.Items[0].SubItems[1].Text, Process.GetProcessesByName(txb_process.Text)[0].Id, cbb_peHeader.SelectedIndex);
+                        msg_inject_sucess(listview_dlls.Items[0].Text);
+                    }
 
-            if (rdb_method_manuallMap.Checked && listview_dlls.SelectedIndices.Count > 0)
-            {
-                statusbar.Text = MethodInjection.manuallMap(listview_dlls.SelectedItems[0].SubItems[1].Text, Process.GetProcessesByName(txb_process.Text)[0].Id, cbb_peHeader.SelectedIndex);
-                msg_inject_sucess(statusbar.Text);
+                    if (rdb_method_manuallMap.Checked)
+                    {
+                        statusbar.Text = MethodInjection.manuallMap(listview_dlls.Items[0].SubItems[1].Text, Process.GetProcessesByName(txb_process.Text)[0].Id, cbb_peHeader.SelectedIndex);
+                        msg_inject_sucess(listview_dlls.Items[0].Text);
+                    }
+                }
             }
-
             if (chk_injection_close_on_inject.Checked)  Close();
         }
 
@@ -133,6 +139,50 @@ namespace Injector
             {
                 timer_automatic_injection.Stop();
                 timer_automatic_injection.Enabled = false;
+            }
+        }
+
+        private void btn_save_config_Click(object sender, EventArgs e)
+        {
+            if (chk_injection_close_on_inject.Checked) IniFile.Write("All", "CloseOnInject", "true");
+            else IniFile.Write("All", "CloseOnInject", "false");
+
+            if (cbb_peHeader.SelectedIndex != -1) IniFile.Write("All", "peHeader", cbb_peHeader.Text);
+
+            if (!string.IsNullOrEmpty(txb_process.Text) && listview_dlls.Items.Count > 0)
+            {
+                IniFile.Write(txb_process.Text, "Process", txb_process.Text);
+                for (int i = 0; i < listview_dlls.Items.Count; i++)
+                {
+                    IniFile.Write(txb_process.Text, "Path" + i, listview_dlls.Items[i].SubItems[1].Text);
+                    if(listview_dlls.Items[i].Checked) IniFile.Write(txb_process.Text, "dll_checked" + i, "true");
+                    else IniFile.Write(txb_process.Text, "dll_checked" + i, "false");
+                }
+                ReaLTaiizor.Controls.CrownMessageBox.ShowInformation("Profile Added successfully!", "Info", ReaLTaiizor.Enum.Crown.DialogButton.Ok);
+            }
+        }
+
+        private void cbb_profile_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbb_profile.SelectedIndex != -1)
+            {
+                listview_dlls.Items.Clear();
+                txb_process.Text = IniFile.Read(cbb_profile.Text, "Process");
+
+                if (!String.IsNullOrEmpty(IniFile.Read("All", "peHeader"))) cbb_peHeader.Text = IniFile.Read("All", "peHeader");
+
+                if (IniFile.Read("All", "CloseOnInject") == "true") chk_injection_close_on_inject.Checked = true;
+                else chk_injection_close_on_inject.Checked = false;
+
+                for (int i = 0; i < 20; i++)
+                {
+                    if (String.IsNullOrEmpty(IniFile.Read(cbb_profile.Text, "Path" + i))) break;
+                    string str = IniFile.Read(cbb_profile.Text, "Path" + i);
+                    ListViewItem listViewItem = new ListViewItem(Path.GetFileName(str));
+                    listViewItem.SubItems.Add(str);
+                    listview_dlls.Items.Add(listViewItem);
+                    if (IniFile.Read(cbb_profile.Text, "dll_checked" + i) == "true") listview_dlls.Items[i].Checked = true;
+                }
             }
         }
     }

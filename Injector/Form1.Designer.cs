@@ -120,7 +120,7 @@
             this.statusbar.ShowTimeDate = false;
             this.statusbar.Size = new System.Drawing.Size(559, 23);
             this.statusbar.TabIndex = 11;
-            this.statusbar.Text = "- Pronto para uso";
+            this.statusbar.Text = "- Ready to use";
             this.statusbar.TextColor = System.Drawing.Color.White;
             this.statusbar.TimeColor = System.Drawing.Color.White;
             this.statusbar.TimeFormat = "dd.MM.yyyy - HH:mm:ss";

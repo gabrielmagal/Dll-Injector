@@ -92,19 +92,19 @@ namespace Injector
                 {
                     if (rdb_method_standardA.Checked)
                     {
-                        statusbar.Text = MethodInjection.standardA(listview_dlls.Items[0].SubItems[1].Text, Process.GetProcessesByName(txb_process.Text)[0].Id, cbb_peHeader.SelectedIndex);
+                        statusbar.Text = Injection.standardA(listview_dlls.Items[0].SubItems[1].Text, Process.GetProcessesByName(txb_process.Text)[0].Id, cbb_peHeader.SelectedIndex);
                         msg_inject_sucess(listview_dlls.Items[0].Text);
                     }
 
                     if (rdb_method_standardW.Checked)
                     {
-                        statusbar.Text = MethodInjection.standardW(listview_dlls.Items[0].SubItems[1].Text, Process.GetProcessesByName(txb_process.Text)[0].Id, cbb_peHeader.SelectedIndex);
+                        statusbar.Text = Injection.standardW(listview_dlls.Items[0].SubItems[1].Text, Process.GetProcessesByName(txb_process.Text)[0].Id, cbb_peHeader.SelectedIndex);
                         msg_inject_sucess(listview_dlls.Items[0].Text);
                     }
 
                     if (rdb_method_manuallMap.Checked)
                     {
-                        statusbar.Text = MethodInjection.manuallMap(listview_dlls.Items[0].SubItems[1].Text, Process.GetProcessesByName(txb_process.Text)[0].Id, cbb_peHeader.SelectedIndex);
+                        statusbar.Text = Injection.manuallMap(listview_dlls.Items[0].SubItems[1].Text, Process.GetProcessesByName(txb_process.Text)[0].Id, cbb_peHeader.SelectedIndex);
                         msg_inject_sucess(listview_dlls.Items[0].Text);
                     }
                 }

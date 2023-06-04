@@ -60,6 +60,7 @@
             this.txb_process = new ReaLTaiizor.Controls.CrownTextBox();
             this.btn_process_listAllProcess = new ReaLTaiizor.Controls.LostButton();
             this.timer_automatic_injection = new System.Windows.Forms.Timer(this.components);
+            this.btn_remove_config = new ReaLTaiizor.Controls.LostButton();
             this.nightForm1.SuspendLayout();
             this.group_injection.SuspendLayout();
             this.group_settings.SuspendLayout();
@@ -229,12 +230,13 @@
             this.thunderGroupBox8.BodyColorB = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(61)))));
             this.thunderGroupBox8.BodyColorC = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(61)))));
             this.thunderGroupBox8.BodyColorD = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(61)))));
+            this.thunderGroupBox8.Controls.Add(this.btn_remove_config);
             this.thunderGroupBox8.Controls.Add(this.btn_save_config);
             this.thunderGroupBox8.Controls.Add(this.cbb_profile);
             this.thunderGroupBox8.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.thunderGroupBox8.Location = new System.Drawing.Point(39, 91);
+            this.thunderGroupBox8.Location = new System.Drawing.Point(9, 91);
             this.thunderGroupBox8.Name = "thunderGroupBox8";
-            this.thunderGroupBox8.Size = new System.Drawing.Size(379, 62);
+            this.thunderGroupBox8.Size = new System.Drawing.Size(439, 62);
             this.thunderGroupBox8.TabIndex = 12;
             this.thunderGroupBox8.Text = "Profile";
             // 
@@ -246,9 +248,9 @@
             this.btn_save_config.ForeColor = System.Drawing.Color.White;
             this.btn_save_config.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.btn_save_config.Image = null;
-            this.btn_save_config.Location = new System.Drawing.Point(209, 30);
+            this.btn_save_config.Location = new System.Drawing.Point(208, 30);
             this.btn_save_config.Name = "btn_save_config";
-            this.btn_save_config.Size = new System.Drawing.Size(161, 24);
+            this.btn_save_config.Size = new System.Drawing.Size(110, 24);
             this.btn_save_config.TabIndex = 9;
             this.btn_save_config.Text = "Save Config";
             this.btn_save_config.Click += new System.EventHandler(this.btn_save_config_Click);
@@ -530,6 +532,21 @@
             // 
             this.timer_automatic_injection.Tick += new System.EventHandler(this.timer_automatic_injection_Tick);
             // 
+            // btn_remove_config
+            // 
+            this.btn_remove_config.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.btn_remove_config.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_remove_config.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btn_remove_config.ForeColor = System.Drawing.Color.White;
+            this.btn_remove_config.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.btn_remove_config.Image = null;
+            this.btn_remove_config.Location = new System.Drawing.Point(320, 30);
+            this.btn_remove_config.Name = "btn_remove_config";
+            this.btn_remove_config.Size = new System.Drawing.Size(110, 24);
+            this.btn_remove_config.TabIndex = 10;
+            this.btn_remove_config.Text = "Remove Config";
+            this.btn_remove_config.Click += new System.EventHandler(this.btn_remove_config_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -591,6 +608,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Timer timer_automatic_injection;
         private ReaLTaiizor.Controls.LostButton btn_save_config;
+        private ReaLTaiizor.Controls.LostButton btn_remove_config;
     }
 }
 

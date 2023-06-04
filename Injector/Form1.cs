@@ -15,13 +15,18 @@ namespace Injector
     public partial class Form1 : Form
     {
         Ini IniFile = new Ini(Application.StartupPath + "\\Config.ini");
-        public string strProcess = ""; //public int pId = 0;
+        public string strProcess = "";
 
         public Form1()
         {
             InitializeComponent();
-            if (!File.Exists(Application.StartupPath + "\\Config.ini")) File.Create(Application.StartupPath + "\\Config.ini").Close();
-            for (int i = 1; i < IniFile.GetSectionNames().Length; i++)  cbb_profile.Items.Add(IniFile.GetSectionNames()[i]);
+
+            // If the file exists, we load the saved profiles, if not, we create the file
+            if (!File.Exists(Application.StartupPath + "\\Config.ini"))
+                File.Create(Application.StartupPath + "\\Config.ini").Close();
+            else
+                for (int i = 0; i < IniFile.GetSectionNames().Length; i++)
+                    cbb_profile.Items.Add(IniFile.GetSectionNames()[i]);
         }
 
         private void btn_close_Click(object sender, EventArgs e)
@@ -54,24 +59,29 @@ namespace Injector
 
         private void btn_dll_remove_Click(object sender, EventArgs e)
         {
-            if(listview_dlls.SelectedIndices.Count > 0)
-                if (ReaLTaiizor.Controls.CrownMessageBox.ShowInformation("Deseja realmente remover a dll selecionada?", "Info", ReaLTaiizor.Enum.Crown.DialogButton.YesNo) == DialogResult.Yes)
+            // Remove selected dll
+            if (listview_dlls.SelectedIndices.Count > 0)
+                if (ReaLTaiizor.Controls.CrownMessageBox.ShowInformation("Do you really want to remove the selected dll?", "Info", ReaLTaiizor.Enum.Crown.DialogButton.YesNo) == DialogResult.Yes)
                     listview_dlls.Items.Remove(listview_dlls.SelectedItems[0]);
         }
 
         private void btn_dll_removeAll_Click(object sender, EventArgs e)
         {
-            if(ReaLTaiizor.Controls.CrownMessageBox.ShowInformation("Deseja realmente remover todas dlls?", "Info", ReaLTaiizor.Enum.Crown.DialogButton.YesNo) == DialogResult.Yes)
+            // Remove selected dlls
+            if (ReaLTaiizor.Controls.CrownMessageBox.ShowInformation("Do you really want to remove all dlls?", "Info", ReaLTaiizor.Enum.Crown.DialogButton.YesNo) == DialogResult.Yes)
                 listview_dlls.Items.Clear();
         }
 
         private void btn_process_listAllProcess_Click(object sender, EventArgs e)
         {
+            // We hide the first screen and show the second one for selecting the listed processes
             Hide();
             Form2 f2 = new Form2(this);
             f2.ShowDialog();
             Show();
-            if(!string.IsNullOrEmpty(strProcess)) txb_process.Text = strProcess;
+
+            // We get the return of the selected process from the other screen
+            if (!string.IsNullOrEmpty(strProcess)) txb_process.Text = strProcess;
         }
 
         public void msg_inject_sucess(string dll)
@@ -109,7 +119,7 @@ namespace Injector
                     }
                 }
             }
-            if (chk_injection_close_on_inject.Checked)  Close();
+            if (chk_injection_close_on_inject.Checked) Close();
         }
 
         private void btn_inject_Click(object sender, EventArgs e)
@@ -119,7 +129,7 @@ namespace Injector
 
         private void timer_automatic_injection_Tick(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(txb_process.Text) && Process.GetProcessesByName(txb_process.Text).Length > 0)
+            if (!string.IsNullOrEmpty(txb_process.Text) && Process.GetProcessesByName(txb_process.Text).Length > 0)
             {
                 inject();
                 chk_injection_automatic.Checked = false;
@@ -144,21 +154,41 @@ namespace Injector
 
         private void btn_save_config_Click(object sender, EventArgs e)
         {
-            if (chk_injection_close_on_inject.Checked) IniFile.Write("All", "CloseOnInject", "true");
-            else IniFile.Write("All", "CloseOnInject", "false");
-
-            if (cbb_peHeader.SelectedIndex != -1) IniFile.Write("All", "peHeader", cbb_peHeader.Text);
-
             if (!string.IsNullOrEmpty(txb_process.Text) && listview_dlls.Items.Count > 0)
             {
+                // Save selected process
                 IniFile.Write(txb_process.Text, "Process", txb_process.Text);
                 for (int i = 0; i < listview_dlls.Items.Count; i++)
                 {
+                    // Save path of listed dlls
                     IniFile.Write(txb_process.Text, "Path" + i, listview_dlls.Items[i].SubItems[1].Text);
-                    if(listview_dlls.Items[i].Checked) IniFile.Write(txb_process.Text, "dll_checked" + i, "true");
-                    else IniFile.Write(txb_process.Text, "dll_checked" + i, "false");
+
+                    // Save status of selected dlls
+                    if (listview_dlls.Items[i].Checked) IniFile.Write(txb_process.Text, "Dll_checked" + i, "true");
+                    else IniFile.Write(txb_process.Text, "Dll_checked" + i, "false");
                 }
+
+                if (chk_injection_close_on_inject.Checked) IniFile.Write(txb_process.Text, "CloseOnInject", "true");
+                else IniFile.Write(txb_process.Text, "CloseOnInject", "false");
+
+                if (cbb_peHeader.SelectedIndex != -1) IniFile.Write(txb_process.Text, "PeHeader", cbb_peHeader.Text);
                 ReaLTaiizor.Controls.CrownMessageBox.ShowInformation("Profile Added successfully!", "Info", ReaLTaiizor.Enum.Crown.DialogButton.Ok);
+            }
+        }
+
+        private void btn_remove_config_Click(object sender, EventArgs e)
+        {
+            // Checks if any profile has been selected
+            if (cbb_profile.SelectedIndex == -1)
+            {
+                ReaLTaiizor.Controls.CrownMessageBox.ShowError("No profiles have been selected to be removed!", "Info", ReaLTaiizor.Enum.Crown.DialogButton.Ok);
+                return;
+            }
+
+            // Precaution if you really want to remove the profile
+            if (ReaLTaiizor.Controls.CrownMessageBox.ShowInformation("Do you really want to remove the saved configuration?", "Info", ReaLTaiizor.Enum.Crown.DialogButton.YesNo) == DialogResult.Yes)
+            {
+                IniFile.Clear_Section(cbb_profile.SelectedItem.ToString());
             }
         }
 

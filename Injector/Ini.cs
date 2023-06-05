@@ -16,7 +16,6 @@ namespace Injector
         public static extern bool WritePrivateProfileString(
         string lpAppName, string lpKeyName, string lpString, string lpFileName);
 
-
         [DllImport("kernel32")]
         private static extern int GetPrivateProfileString(string section,
         string key,
@@ -25,25 +24,20 @@ namespace Injector
         int size,
         string filePath);
 
-
         [DllImport("kernel32")]
         static extern int GetPrivateProfileString(string Section, int Key,
                string Value, [MarshalAs(UnmanagedType.LPArray)] byte[] Result,
                int Size, string FileName);
-
 
         [DllImport("kernel32")]
         static extern int GetPrivateProfileString(int Section, string Key,
                string Value, [MarshalAs(UnmanagedType.LPArray)] byte[] Result,
                int Size, string FileName);
 
-
-
         public Ini(string filePath)
         {
             this.filePath = filePath;
         }
-
 
         public string[] GetSectionNames()
         {
@@ -59,7 +53,6 @@ namespace Injector
                 }
             }
         }
-
 
         public string[] GetEntryNames(string section)
         {

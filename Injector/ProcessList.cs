@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace Injector
 {
-    public partial class Form2 : Form
+    public partial class ProcessList : Form
     {
         private Form1 parentForm1;
-        public Form2(Form1 parentForm1)
+        public ProcessList(Form1 parentForm1)
         {
             this.parentForm1 = parentForm1;
             InitializeComponent();
@@ -40,6 +40,21 @@ namespace Injector
                 //parentForm1.pId = int.Parse(listview_process.SelectedItems[0].Text);
             }
             Close();
+        }
+
+        private void txb_process_KeyUp(object sender, KeyEventArgs e)
+        {
+            listview_process.Items.Clear();
+            Process[] listProcess = Process.GetProcesses();
+            foreach (Process process in listProcess)
+            {
+                if(process.ProcessName.ToLower().Contains(txb_process.Text.ToLower()) || process.Id.ToString().Contains(txb_process.Text))
+                {
+                    ListViewItem item = new ListViewItem(process.Id.ToString());
+                    item.SubItems.Add(process.ProcessName);
+                    listview_process.Items.Add(item);
+                }
+            }
         }
     }
 }

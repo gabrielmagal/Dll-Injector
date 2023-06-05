@@ -75,7 +75,7 @@ namespace Injector
         {
             // We hide the first screen and show the second one for selecting the listed processes
             Hide();
-            new Form2(this).ShowDialog();
+            new ProcessList(this).ShowDialog();
             Show();
 
             // We get the return of the selected process from the other screen

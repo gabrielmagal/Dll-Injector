@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.InteropServices;
-
 
 namespace Injector
 {
@@ -44,7 +39,7 @@ namespace Injector
             for (int maxsize = 500; true; maxsize *= 2)
             {
                 byte[] bytes = new byte[maxsize];
-                int size = GetPrivateProfileString(0, "", "", bytes, maxsize, this.filePath);
+                int size = GetPrivateProfileString(0, "", "", bytes, maxsize, filePath);
                 if (size < maxsize - 2)
                 {
                     string Selected = Encoding.ASCII.GetString(bytes, 0,
@@ -59,7 +54,7 @@ namespace Injector
             for (int maxsize = 500; true; maxsize *= 2)
             {
                 byte[] bytes = new byte[maxsize];
-                int size = GetPrivateProfileString(section, 0, "", bytes, maxsize, this.filePath);
+                int size = GetPrivateProfileString(section, 0, "", bytes, maxsize, filePath);
                 if (size < maxsize - 2)
                 {
                     string entries = Encoding.ASCII.GetString(bytes, 0,
@@ -71,25 +66,25 @@ namespace Injector
 
         public void Write(string section, string key, string value)
         {
-            WritePrivateProfileString(section, key, value, this.filePath);
+            WritePrivateProfileString(section, key, value, filePath);
         }
 
         public string Read(string section, string key)
         {
             StringBuilder SB = new StringBuilder(255);
-            int i = GetPrivateProfileString(section, key, "", SB, 255, this.filePath);
+            int i = GetPrivateProfileString(section, key, "", SB, 255, filePath);
             return SB.ToString();
         }
 
         public void Clear_Section(string section)
         {
-            WritePrivateProfileString(section, null, null, this.filePath);
+            WritePrivateProfileString(section, null, null, filePath);
         }
 
         public string FilePath
         {
-            get { return this.filePath; }
-            set { this.filePath = value; }
+            get { return filePath; }
+            set { filePath = value; }
         }
     }
 }

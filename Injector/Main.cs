@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Injector
@@ -19,18 +13,18 @@ namespace Injector
 
         public Form1()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
             // If the file exists, we load the saved profiles, if not, we create the file
             if (!File.Exists(Application.StartupPath + "\\Config.ini"))
                 File.Create(Application.StartupPath + "\\Config.ini").Close();
             else
-                loadProfilesIni();
+                this.loadProfilesIni();
         }
 
         private void btn_close_Click(object sender, EventArgs e)
         {
-            Close();
+            this.Close();
         }
 
         private void btn_dll_add_Click(object sender, EventArgs e)
@@ -74,12 +68,13 @@ namespace Injector
         private void btn_process_listAllProcess_Click(object sender, EventArgs e)
         {
             // We hide the first screen and show the second one for selecting the listed processes
-            Hide();
+            this.Hide();
             new ProcessList(this).ShowDialog();
-            Show();
+            this.Show();
 
             // We get the return of the selected process from the other screen
-            if (!string.IsNullOrEmpty(strProcess)) txb_process.Text = strProcess;
+            if (!string.IsNullOrEmpty(strProcess))
+                txb_process.Text = strProcess;
         }
 
         public void msg_inject_sucess(string dll)
@@ -93,7 +88,7 @@ namespace Injector
             else statusbar.RectColor = Color.IndianRed;
         }
 
-        public void inject()
+        public void Inject()
         {
             // Loop to inject one or more dlls
             for (int i = 0; i < listview_dlls.Items.Count; i++)
@@ -102,24 +97,31 @@ namespace Injector
                 {
                     if (rdb_method_standardA.Checked)
                     {
-                        statusbar.Text = Injection.standardA(listview_dlls.Items[0].SubItems[1].Text, Process.GetProcessesByName(txb_process.Text)[0].Id, cbb_peHeader.SelectedIndex);
-                        msg_inject_sucess(listview_dlls.Items[0].Text);
+                        statusbar.Text = Injection.StandardA(listview_dlls.Items[0].SubItems[1].Text, Process.GetProcessesByName(txb_process.Text)[0].Id, cbb_peHeader.SelectedIndex);
+                        this.msg_inject_sucess(listview_dlls.Items[0].Text);
                     }
 
                     if (rdb_method_standardW.Checked)
                     {
-                        statusbar.Text = Injection.standardW(listview_dlls.Items[0].SubItems[1].Text, Process.GetProcessesByName(txb_process.Text)[0].Id, cbb_peHeader.SelectedIndex);
-                        msg_inject_sucess(listview_dlls.Items[0].Text);
+                        statusbar.Text = Injection.StandardW(listview_dlls.Items[0].SubItems[1].Text, Process.GetProcessesByName(txb_process.Text)[0].Id, cbb_peHeader.SelectedIndex);
+                        this.msg_inject_sucess(listview_dlls.Items[0].Text);
+                    }
+
+                    if (rdb_method_ldrLoadDll.Checked)
+                    {
+                        statusbar.Text = Injection.LdrLoadDll(listview_dlls.Items[0].SubItems[1].Text, Process.GetProcessesByName(txb_process.Text)[0].Id, cbb_peHeader.SelectedIndex);
+                        this.msg_inject_sucess(listview_dlls.Items[0].Text);
                     }
 
                     if (rdb_method_manuallMap.Checked)
                     {
-                        statusbar.Text = Injection.manuallMap(listview_dlls.Items[0].SubItems[1].Text, Process.GetProcessesByName(txb_process.Text)[0].Id, cbb_peHeader.SelectedIndex);
-                        msg_inject_sucess(listview_dlls.Items[0].Text);
+                        statusbar.Text = Injection.ManuallMap(listview_dlls.Items[0].SubItems[1].Text, Process.GetProcessesByName(txb_process.Text)[0].Id, cbb_peHeader.SelectedIndex);
+                        this.msg_inject_sucess(listview_dlls.Items[0].Text);
                     }
                 }
             }
-            if (chk_injection_close_on_inject.Checked) Close();
+            if (chk_injection_close_on_inject.Checked)
+                this.Close();
         }
 
         private void loadProfilesIni()
@@ -132,7 +134,7 @@ namespace Injector
 
         private void btn_inject_Click(object sender, EventArgs e)
         {
-            inject();
+            this.Inject();
         }
 
         private void timer_automatic_injection_Tick(object sender, EventArgs e)
@@ -140,7 +142,7 @@ namespace Injector
             // Automatic injection
             if (!string.IsNullOrEmpty(txb_process.Text) && Process.GetProcessesByName(txb_process.Text).Length > 0)
             {
-                inject();
+                this.Inject();
                 chk_injection_automatic.Checked = false;
                 timer_automatic_injection.Stop();
                 timer_automatic_injection.Enabled = false;
@@ -173,21 +175,36 @@ namespace Injector
                     IniFile.Write(txb_process.Text, "Path" + i, listview_dlls.Items[i].SubItems[1].Text);
 
                     // Save status of selected dlls
-                    if (listview_dlls.Items[i].Checked) IniFile.Write(txb_process.Text, "Dll_checked" + i, "true");
-                    else IniFile.Write(txb_process.Text, "Dll_checked" + i, "false");
+                    if (listview_dlls.Items[i].Checked)
+                        IniFile.Write(txb_process.Text, "Dll_checked" + i, "true");
+                    else
+                        IniFile.Write(txb_process.Text, "Dll_checked" + i, "false");
                 }
 
+                if (rdb_method_standardA.Checked)
+                    IniFile.Write(txb_process.Text, "MethodInjection", "StandardA");
+                else if (rdb_method_standardW.Checked)
+                    IniFile.Write(txb_process.Text, "MethodInjection", "StandardW");
+                else if (rdb_method_ldrLoadDll.Checked)
+                    IniFile.Write(txb_process.Text, "MethodInjection", "LdrLoadDll");
+                else if (rdb_method_manuallMap.Checked)
+                    IniFile.Write(txb_process.Text, "MethodInjection", "ManuallMap");
+
                 // Save automatic inject option
-                if (chk_injection_automatic.Checked) IniFile.Write(txb_process.Text, "AutomaticInjection", "true");
-                else IniFile.Write(txb_process.Text, "AutomaticInjection", "false");
+                if (chk_injection_automatic.Checked)
+                    IniFile.Write(txb_process.Text, "AutomaticInjection", "true");
+                else
+                    IniFile.Write(txb_process.Text, "AutomaticInjection", "false");
 
                 // Save close option after inject
-                if (chk_injection_close_on_inject.Checked) IniFile.Write(txb_process.Text, "CloseOnInject", "true");
-                else IniFile.Write(txb_process.Text, "CloseOnInject", "false");
+                if (chk_injection_close_on_inject.Checked)
+                    IniFile.Write(txb_process.Text, "CloseOnInject", "true");
+                else
+                    IniFile.Write(txb_process.Text, "CloseOnInject", "false");
 
                 // Save header option
                 if (cbb_peHeader.SelectedIndex != -1) IniFile.Write(txb_process.Text, "PeHeader", cbb_peHeader.Text);
-                loadProfilesIni();
+                this.loadProfilesIni();
                 ReaLTaiizor.Controls.CrownMessageBox.ShowInformation("Profile Added successfully!", "Info", ReaLTaiizor.Enum.Crown.DialogButton.Ok);
             }
         }
@@ -205,7 +222,7 @@ namespace Injector
             if (ReaLTaiizor.Controls.CrownMessageBox.ShowInformation("Do you really want to remove the saved configuration?", "Info", ReaLTaiizor.Enum.Crown.DialogButton.YesNo) == DialogResult.Yes)
             {
                 IniFile.Clear_Section(cbb_profile.SelectedItem.ToString());
-                loadProfilesIni();
+                this.loadProfilesIni();
             }
         }
 
@@ -218,16 +235,40 @@ namespace Injector
                 // Read saved process
                 txb_process.Text = IniFile.Read(cbb_profile.Text, "Process");
 
+                switch (IniFile.Read(cbb_profile.Text, "MethodInjection"))
+                {
+                    case "StandardA":
+                        rdb_method_standardA.Checked = true;
+                        break;
+
+                    case "StandardW":
+                        rdb_method_standardW.Checked = true;
+                        break;
+
+                    case "LdrLoadDll":
+                        rdb_method_ldrLoadDll.Checked = true;
+                        break;
+
+                    case "ManuallMap":
+                        rdb_method_manuallMap.Checked = true;
+                        break;
+                }
+
                 // Read saved option peHeader
-                if (!string.IsNullOrEmpty(IniFile.Read(cbb_profile.Text, "PeHeader"))) cbb_peHeader.Text = IniFile.Read(cbb_profile.Text, "PeHeader");
+                if (!string.IsNullOrEmpty(IniFile.Read(cbb_profile.Text, "PeHeader")))
+                    cbb_peHeader.Text = IniFile.Read(cbb_profile.Text, "PeHeader");
 
                 // Read saved option automatic injection
-                if (IniFile.Read(cbb_profile.Text, "AutomaticInjection") == "true") chk_injection_automatic.Checked = true;
-                else chk_injection_automatic.Checked = false;
+                if (IniFile.Read(cbb_profile.Text, "AutomaticInjection") == "true")
+                    chk_injection_automatic.Checked = true;
+                else
+                    chk_injection_automatic.Checked = false;
 
                 // Read saved option close on inject
-                if (IniFile.Read(cbb_profile.Text, "CloseOnInject") == "true") chk_injection_close_on_inject.Checked = true;
-                else chk_injection_close_on_inject.Checked = false;
+                if (IniFile.Read(cbb_profile.Text, "CloseOnInject") == "true")
+                    chk_injection_close_on_inject.Checked = true;
+                else
+                    chk_injection_close_on_inject.Checked = false;
 
                 // Read all saved dlls
                 for (int i = 0; i < 20; i++)
@@ -237,7 +278,8 @@ namespace Injector
                     ListViewItem listViewItem = new ListViewItem(Path.GetFileName(str));
                     listViewItem.SubItems.Add(str);
                     listview_dlls.Items.Add(listViewItem);
-                    if (IniFile.Read(cbb_profile.Text, "Dll_checked" + i) == "true") listview_dlls.Items[i].Checked = true;
+                    if (IniFile.Read(cbb_profile.Text, "Dll_checked" + i) == "true")
+                        listview_dlls.Items[i].Checked = true;
                 }
             }
         }

@@ -60,7 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdditionalMethods.cs" />
+    <Compile Include="Utils\AdditionalMethods.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,14 +73,13 @@
     <Compile Include="ProcessList.Designer.cs">
       <DependentUpon>ProcessList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Ini.cs" />
+    <Compile Include="Utils\Ini.cs" />
     <Compile Include="Injection.cs" />
-    <Compile Include="Messages.cs" />
     <Compile Include="PEHeader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Structures.cs" />
-    <Compile Include="UnsafeNativeMethods.cs" />
+    <Compile Include="Utils\Structures.cs" />
+    <Compile Include="Utils\UnsafeNativeMethods.cs" />
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
